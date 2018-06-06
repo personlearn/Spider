@@ -1,4 +1,6 @@
 ﻿using Spider.IService;
+using Spider.Models;
+using Spider.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,42 +10,54 @@ using System.Threading.Tasks;
 
 namespace Spider.Service
 {
-    public class TYRegexp : IRegexp
+    public class TYRegexp
     {
-        public string TYRegexTitle(string html, ref int pagecount)
+        public static void TYRegexTitle(string html)
         {
-            string pattern = @"<title>([\s\S]*?)</title>";
+            string pattern = RegExpHelper.regTitle;
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
             Match title = r.Match(html);
 
-            pattern = @"return goPage.*?(\d{1,4})\)";
+            int pagecount;
+            pattern = RegExpHelper.regTYPage;
             r = new Regex(pattern, RegexOptions.IgnoreCase);
             int.TryParse(r.Match(html).Result("$1"), out pagecount);
-            return title.Result("$1");
+
+            TYSpiderService.ty.Title = title.Result("$1");
+            TYSpiderService.ty.PageCount = pagecount;
         }
 
-        public string TYRegexArticle(string html)
+        public static void TYRegexArticle(string html,int pageindex)
         {
-            string pattern = @"<div class=""atl-info"".*?>(?<author>[\s\S]*?)</div>[\s\S]*?<div class=""bbs-content.*?"">(?<article>[\s\S]*?)</div>";
+            string pattern = RegExpHelper.regTYArticel_201806061111;
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
 
             //return r.Matches(html);
             MatchCollection articles = r.Matches(html);
             List<Match> listmatch = new List<Match>();
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
+            //foreach (Match item in articles)
+            //{
+            //    sb.Append(WipeOffHTMLSign(item.Groups["author"].Value.Trim()) + "\n");
+            //    sb.Append(WipeOffHTMLSign(item.Groups["article"].Value.Trim()) + "\n");
+            //}
+            //return sb.ToString();
             foreach (Match item in articles)
             {
-                sb.Append(WipeOffHTMLSign(item.Groups["author"].Value.Trim()) + "\n");
-                sb.Append(WipeOffHTMLSign(item.Groups["article"].Value.Trim()) + "\n");
+                TYAricleBody body = new TYAricleBody();
+                body.author = WipeOffHTMLSign(item.Groups["author"].Value.Trim());
+                body.article = WipeOffHTMLSign(item.Groups["article"].Value.Trim());
+                body.applyid = WipeOffHTMLSign(item.Groups["id"].Value.Trim());
+                body.pageindex = pageindex;
+                TYSpiderService.ty.TYAriclelist.Add(body);
             }
-            return sb.ToString();
         }
 
-        public List<string> TYRegexUrl(string url, int pagecount)
+        public static List<string> TYRegexUrl(string url, int pagecount)
         {
             List<string> urllist = new List<string>();
             string input = url;
-            string pattern = @"\d{1,4}(?=\.shtml$)";
+            string pattern = RegExpHelper.regTYUrl;
             for (int i = 1; i < pagecount + 1; i++)
             {
                 string replacement = i.ToString();
@@ -53,21 +67,16 @@ namespace Spider.Service
             return urllist;
         }
 
-        public string WipeOffHTMLSign(string Article)
+        public static string WipeOffHTMLSign(string Article)
         {
-            string pattern = @"<a.*?>|</a>|<strong.*?>|</strong>|<span.*?>|</span>|\s+";
-            string pattern1 = @"<br>|<br />";
+            string pattern = RegExpHelper.regWipeOffHTMLSign1;
+            string pattern1 = RegExpHelper.regWipeOffHTMLSign2;
             string replacement = " ";
             string replacement1 = "\n";
             string val = Regex.Replace(Article, pattern, replacement);
             string article = Regex.Replace(val, pattern1, replacement1);
 
             return article;
-        }
-
-        public string RunRegexp()
-        {
-            throw new NotImplementedException();
         }
     }
 }
