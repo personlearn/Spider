@@ -10,7 +10,42 @@ namespace Spider.util
 {
     public class StrToFile
     {
-        public static bool toXml(List<XElement> input, string dirName, string filename, string rootname)
+        public static bool toXml(XElement input, string dirName, string filename, string rootname)
+        {
+            try
+            {
+                XDocument xdoc;
+                XElement root;
+                string filePath = CreateFilePath(dirName, filename);
+                try
+                {
+                    xdoc = XDocument.Load(filePath);
+                    root = xdoc.Root;
+                }
+                catch
+                {
+                    xdoc = new XDocument();
+                    root = new XElement(rootname);
+                }
+                root.Add(input);
+                try
+                {
+                    xdoc.Add(root);
+                }
+                catch
+                {
+
+                }
+                xdoc.Save(filePath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static bool toXml(IEnumerable<XElement> input, string dirName, string filename, string rootname)
         {
             try
             {

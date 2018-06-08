@@ -12,6 +12,7 @@ namespace Spider.Service
 {
     public class TYRegexp
     {
+        public static Redishelper redis = Redishelper.GetRedis("127.0.0.1:6379");
         public static void TYRegexTitle(string html)
         {
             string pattern = RegExpHelper.regTitle;
@@ -42,15 +43,21 @@ namespace Spider.Service
             //    sb.Append(WipeOffHTMLSign(item.Groups["article"].Value.Trim()) + "\n");
             //}
             //return sb.ToString();
+         
+            List<TYAricleBody> list = new List<TYAricleBody>();
             foreach (Match item in articles)
             {
                 TYAricleBody body = new TYAricleBody();
                 body.author = WipeOffHTMLSign(item.Groups["author"].Value.Trim());
                 body.article = WipeOffHTMLSign(item.Groups["article"].Value.Trim());
                 body.applyid = WipeOffHTMLSign(item.Groups["id"].Value.Trim());
-                body.pageindex = pageindex;
-                TYSpiderService.ty.TYAriclelist.Add(body);
+                body.pageindex = pageindex + 1;
+                list.Add(body);
+                //redis.HashSet("TYArticle", body.applyid, body);
+                //TYSpiderService.ty.TYAriclelist.Add(body);
             }
+            redis.HashSet("TYArticle", pageindex.ToString(), list);            
+            Loghelper.Info(typeof(TYRegexp).ToString(), string.Format("第{0}页已装填完毕,字节长度{1}", pageindex + 1, html.Length));
         }
 
         public static List<string> TYRegexUrl(string url, int pagecount)
