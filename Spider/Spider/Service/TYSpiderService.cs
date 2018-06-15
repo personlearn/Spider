@@ -12,6 +12,7 @@ namespace Spider.Service
 {
     public class TYSpiderService : IService.ISpider
     {
+        private static readonly string classinfo = typeof(TYSpiderService).ToString();
         internal static TYArticle ty;
         private string url;
         public TYSpiderService(string url)
@@ -33,7 +34,7 @@ namespace Spider.Service
             List<string> urllist = TYRegexp.TYRegexUrl(url, ty.PageCount);
             for (int i = 0; i < ty.PageCount; i++)
             {
-                if (TYRegexp.redis.IsExistsHashKey("TYArticle", i.ToString()) && TYRegexp.redis.GetHashValue("TYArticle", i.ToString()) != "[]")
+                if (TYRegexp.redis.IsExistsHashKey("TYArticleHOST", i.ToString()) && TYRegexp.redis.GetHashValue("TYArticleHOST", i.ToString()) != "[]")
                 {
                     continue;
                 }
@@ -66,9 +67,9 @@ namespace Spider.Service
         {
             for (int i = 0; i < ty.PageCount; i++)
             {
-                if (TYRegexp.redis.IsExistsHashKey("TYArticle", i.ToString()))
+                if (TYRegexp.redis.IsExistsHashKey("TYArticleHOST", i.ToString()))
                 {
-                    IEnumerable<TYAricleBody> bodylis = TYRegexp.redis.GetHashValue<IEnumerable<TYAricleBody>>("TYArticle", i.ToString());
+                    IEnumerable<TYAricleBody> bodylis = TYRegexp.redis.GetHashValue<IEnumerable<TYAricleBody>>("TYArticleHOST", i.ToString());
                     List<XElement> lis = new List<XElement>();
                     foreach (var body in bodylis)
                     {
@@ -81,7 +82,7 @@ namespace Spider.Service
                         lis.Add(xe);
                     }
                     StrToFile.toXml(lis, "source//tianya", ty.Title, "TYArticle");
-                    Loghelper.Info(typeof(TYSpiderService).ToString(), string.Format("第{0}页发射成功", i + 1));
+                    Loghelper.Info(classinfo, string.Format("第{0}页发射成功", i + 1));
                 }
             }
             return true;
@@ -91,17 +92,17 @@ namespace Spider.Service
         {
             for (int i = 0; i < ty.PageCount; i++)
             {
-                if (TYRegexp.redis.IsExistsHashKey("TYArticle", i.ToString()))
+                if (TYRegexp.redis.IsExistsHashKey("TYArticleHOST", i.ToString()))
                 {
                     StringBuilder sb = new StringBuilder();
                     sb.Append(string.Format("\n----------------第{0}页--------------\n", i + 1));
-                    IEnumerable<TYAricleBody> bodylis = TYRegexp.redis.GetHashValue<IEnumerable<TYAricleBody>>("TYArticle", i.ToString());
+                    IEnumerable<TYAricleBody> bodylis = TYRegexp.redis.GetHashValue<IEnumerable<TYAricleBody>>("TYArticleHOST", i.ToString());
                     foreach (var body in bodylis)
                     {
-                        sb.Append(body.article + "\n");
+                        sb.Append("【作者：" + body.author + "】" + body.article + "\n");
                     }
                     StrToFile.toTxt(sb.ToString(), "source//tianya", ty.Title);
-                    Loghelper.Info(typeof(TYSpiderService).ToString(), string.Format("第{0}页发射成功", i + 1));
+                    Loghelper.Info(classinfo, string.Format("第{0}页发射成功", i + 1));
                 }
             }
             return true;

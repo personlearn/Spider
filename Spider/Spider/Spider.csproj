@@ -225,6 +225,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IService\ISave.cs" />
     <Compile Include="IService\ISpider.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -234,10 +235,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Service\SaveToTxt.cs" />
+    <Compile Include="Service\SaveToXml.cs" />
     <Compile Include="Service\TYHttpHeader.cs" />
     <Compile Include="Service\TYRegexp.cs" />
     <Compile Include="Service\TYSpiderService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="util\ConfigHelper.cs" />
+    <Compile Include="util\EnumType.cs" />
     <Compile Include="util\HttpHelper.cs" />
     <Compile Include="util\HttpHeader.cs" />
     <Compile Include="util\Loghelper.cs" />
@@ -245,6 +250,8 @@
     <Compile Include="util\RegExpHelper.cs" />
     <Compile Include="util\StrToFile.cs" />
     <Compile Include="util\TempsaveHelper.cs" />
+    <Compile Include="util\utilhelper.cs" />
+    <Compile Include="util\WebConfigSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -274,6 +281,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="config\app.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

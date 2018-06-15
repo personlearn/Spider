@@ -12,6 +12,7 @@ namespace Spider.Service
 {
     public class TYRegexp
     {
+        private static readonly string classinfo = typeof(TYRegexp).ToString();
         public static Redishelper redis = Redishelper.GetRedis("127.0.0.1:6379");
         public static void TYRegexTitle(string html)
         {
@@ -30,7 +31,7 @@ namespace Spider.Service
 
         public static void TYRegexArticle(string html,int pageindex)
         {
-            string pattern = RegExpHelper.regTYArticel_201806061111;
+            string pattern = RegExpHelper.regTYArticel_host;
             Regex r = new Regex(pattern, RegexOptions.IgnoreCase);
 
             //return r.Matches(html);
@@ -56,8 +57,8 @@ namespace Spider.Service
                 //redis.HashSet("TYArticle", body.applyid, body);
                 //TYSpiderService.ty.TYAriclelist.Add(body);
             }
-            redis.HashSet("TYArticle", pageindex.ToString(), list);            
-            Loghelper.Info(typeof(TYRegexp).ToString(), string.Format("第{0}页已装填完毕,字节长度{1}", pageindex + 1, html.Length));
+            redis.HashSet("TYArticleHOST", pageindex.ToString(), list);            
+            Loghelper.Info(classinfo, string.Format("第{0}页已装填完毕,字节长度{1}", pageindex + 1, html.Length));
         }
 
         public static List<string> TYRegexUrl(string url, int pagecount)
