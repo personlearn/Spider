@@ -231,6 +231,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\ResultItems.cs" />
+    <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TYArticle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -240,16 +244,21 @@
     <Compile Include="Service\TYHttpHeader.cs" />
     <Compile Include="Service\TYRegexp.cs" />
     <Compile Include="Service\TYSpiderService.cs" />
+    <Compile Include="Service\TYSpiderService1.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="util\ConfigHelper.cs" />
+    <Compile Include="util\ContentType.cs" />
+    <Compile Include="util\CryptoUtil.cs" />
     <Compile Include="util\EnumType.cs" />
     <Compile Include="util\HttpHelper.cs" />
     <Compile Include="util\HttpHeader.cs" />
     <Compile Include="util\Loghelper.cs" />
+    <Compile Include="util\ReadOnlyEnumerable.cs" />
     <Compile Include="util\Redishelper.cs" />
     <Compile Include="util\RegExpHelper.cs" />
     <Compile Include="util\StrToFile.cs" />
     <Compile Include="util\TempsaveHelper.cs" />
+    <Compile Include="util\UrlUtil.cs" />
     <Compile Include="util\utilhelper.cs" />
     <Compile Include="util\WebConfigSection.cs" />
   </ItemGroup>

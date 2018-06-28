@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider_pro", "Spider_pro\Spider_pro.csproj", "{D2CE43B2-1D46-47FA-A525-C3E5783E1F6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider.Core", "Spider.Core\Spider.Core.csproj", "{EFE02305-024F-4B0A-88AB-432620094FF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider", "..\Spider\Spider\Spider.csproj", "{630A2356-983A-4722-9BA8-33F79055E713}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2CE43B2-1D46-47FA-A525-C3E5783E1F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CE43B2-1D46-47FA-A525-C3E5783E1F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CE43B2-1D46-47FA-A525-C3E5783E1F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CE43B2-1D46-47FA-A525-C3E5783E1F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE02305-024F-4B0A-88AB-432620094FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE02305-024F-4B0A-88AB-432620094FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE02305-024F-4B0A-88AB-432620094FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE02305-024F-4B0A-88AB-432620094FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630A2356-983A-4722-9BA8-33F79055E713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630A2356-983A-4722-9BA8-33F79055E713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630A2356-983A-4722-9BA8-33F79055E713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630A2356-983A-4722-9BA8-33F79055E713}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
