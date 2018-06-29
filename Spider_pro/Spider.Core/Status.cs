@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spider.Core
 {
-    [Flags]
+    [System.Flags]
     public enum Status
     {
         /// <summary>

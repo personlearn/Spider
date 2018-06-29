@@ -127,37 +127,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Downloader\DownloadException.cs" />
+    <Compile Include="Downloader\HttpClientDownloader.cs" />
     <Compile Include="Downloader\IDownloader.cs" />
-    <Compile Include="Env.cs" />
-    <Compile Include="IAppBase.cs" />
-    <Compile Include="IControllable.cs" />
-    <Compile Include="IExecuteRecord.cs" />
-    <Compile Include="IIdentity.cs" />
-    <Compile Include="INamed.cs" />
-    <Compile Include="Infrastructure\LogUtil.cs" />
     <Compile Include="Infrastructure\ReadOnlyEnumerable.cs" />
-    <Compile Include="Pipeline\IPipeline.cs" />
-    <Compile Include="Processor\IPageProcessor.cs" />
-    <Compile Include="IRunable.cs" />
     <Compile Include="ISpider.cs" />
-    <Compile Include="ITask.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="ResultItems.cs" />
-    <Compile Include="Scheduler\IScheduler.cs" />
     <Compile Include="Site.cs" />
     <Compile Include="Spider.cs" />
-    <Compile Include="SpiderException.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Monitor\" />
-    <Folder Include="Proxy\" />
-    <Folder Include="Redial\" />
-    <Folder Include="Selector\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
